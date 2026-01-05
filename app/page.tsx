@@ -90,7 +90,7 @@ export default function Home() {
                 onClick={() => scrollToSection("contact")}
                 className="px-10 py-4 border border-gray-600 hover:border-teal-400 text-white text-lg rounded-full transition-all hover:bg-gray-800"
               >
-                Contact Me
+                Let's Connect
               </button>
             </div>
           </div>

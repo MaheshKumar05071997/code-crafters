@@ -283,12 +283,12 @@ export default function Contact() {
                 <textarea
                   rows={4}
                   name="message"
-                  className={`w-full bg-slate-950 border rounded-lg px-4 py-3 text-white focus:outline-none transition-colors ${
+                  className={`w-full bg-slate-950 border rounded-lg px-4 py-3 text-white placeholder:italic focus:outline-none transition-colors ${
                     errors.message
                       ? "border-red-500 focus:border-red-500"
                       : "border-gray-700 focus:border-teal-500"
                   }`}
-                  placeholder="Tell me about your requirement.."
+                  placeholder="Please describe your project, timeline, and key business goals.."
                   onChange={handleChange}
                   value={formData.message}
                 ></textarea>

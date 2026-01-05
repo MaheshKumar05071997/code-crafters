@@ -1,9 +1,9 @@
-"use client"; // <--- ADD THIS AT THE VERY TOP
-import Image from "next/image";
+"use client";
 import Work from "../components/Work";
 import Services from "../components/Services";
 import Contact from "../components/Contact";
-import About from "../components/About"; // Import About
+import About from "../components/About";
+import HeroAnimation from "../components/HeroAnimation";
 
 export default function Home() {
   // Custom scroll function for buttons
@@ -14,14 +14,13 @@ export default function Home() {
     }
   };
 
-  // --- SEO: STRUCTURED DATA (The Secret Sauce) ---
-  // This tells Google you are a Developer in Bangalore
+  // --- SEO: STRUCTURED DATA ---
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService", // Changed from ProfessionalService to Organization
-    name: "Code Crafters", // Your Agency Name
+    "@type": "Organization", // Changed to Organization for an Agency
+    name: "Code Crafters",
     url: "https://code-crafters-peach.vercel.app",
-    logo: "https://code-crafters-peach.vercel.app/profile_image.jpg", // Ideally use a logo image here later
+    logo: "https://code-crafters-peach.vercel.app/profile_image.jpg",
     telephone: "+91-9880567308",
     description:
       "Digital Product Studio specializing in Business Automation and App Development.",
@@ -31,7 +30,7 @@ export default function Home() {
       addressRegion: "Karnataka",
       addressCountry: "IN",
     },
-    priceRange: "30000", // Tells Google you are affordable/mid-range
+    priceRange: "30000",
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -48,7 +47,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* 1. HERO */}
+      {/* 1. HERO SECTION */}
       <section
         id="home"
         className="min-h-screen flex flex-col items-center justify-center px-6 pb-6 pt-28 md:p-12 relative overflow-hidden"
@@ -58,11 +57,12 @@ export default function Home() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px]" />
 
         <div className="z-10 max-w-screen-xl w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12 font-sans">
-          {/* Text */}
+          {/* LEFT SIDE: Text */}
           <div className="lg:w-[65%] flex flex-col items-start space-y-8 text-left">
+            {/* AGENCY LABEL */}
             <div className="inline-block px-3 py-1 border border-teal-500/30 rounded-full bg-teal-500/10 backdrop-blur-sm">
               <p className="text-teal-400 text-xs md:text-sm font-bold tracking-widest uppercase">
-                Full Stack Developer
+                Digital Product Studio
               </p>
             </div>
 
@@ -95,23 +95,20 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Image */}
-          <div className="lg:w-[35%] flex justify-center lg:justify-end relative mt-8 lg:mt-0">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[120%] h-[120%] bg-gradient-to-tr from-blue-600/30 to-teal-500/30 rounded-full blur-3xl"></div>
-            <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] border border-gray-800/50 rounded-2xl overflow-hidden bg-gray-900/50 backdrop-blur-sm shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500">
-              <Image
-                src="/profile_image.jpg"
-                alt="Mahesh"
-                fill
-                style={{ objectFit: "cover" }}
-                className="hover:scale-105 transition-transform duration-500"
-              />
+          {/* RIGHT SIDE: HERO ANIMATION (Replaces the Image) */}
+          <div className="lg:w-[35%] flex justify-center lg:justify-end relative mt-12 lg:mt-0">
+            {/* Glow Effect */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[120%] h-[120%] bg-gradient-to-tr from-blue-600/20 to-teal-500/20 rounded-full blur-3xl"></div>
+
+            {/* The Animation Component */}
+            <div className="relative w-full max-w-[500px]">
+              <HeroAnimation />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. ABOUT (New!) */}
+      {/* 2. ABOUT */}
       <About />
 
       {/* 3. WORK */}

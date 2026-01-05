@@ -20,8 +20,9 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService", // Changed from ProfessionalService to Organization
     name: "Code Crafters", // Your Agency Name
-    url: "https://code-crafters.vercel.app",
-    logo: "https://code-crafters.vercel.app/profile_image.jpg", // Ideally use a logo image here later
+    url: "https://code-crafters-peach.vercel.app",
+    logo: "https://code-crafters-peach.vercel.app/profile_image.jpg", // Ideally use a logo image here later
+    telephone: "+91-9880567308",
     description:
       "Digital Product Studio specializing in Business Automation and App Development.",
     address: {
@@ -30,7 +31,7 @@ export default function Home() {
       addressRegion: "Karnataka",
       addressCountry: "IN",
     },
-    priceRange: "$$", // Tells Google you are affordable/mid-range
+    priceRange: "30000", // Tells Google you are affordable/mid-range
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],

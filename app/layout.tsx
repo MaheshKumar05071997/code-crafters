@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 // --- SEO CONFIGURATION ---
 export const metadata: Metadata = {
   // 1. Base URL (Important for images/links to work on social media)
-  metadataBase: new URL("https://code-crafters.vercel.app"), // REPLACE THIS later
+  metadataBase: new URL("https://code-crafters-peach.vercel.app"),
 
   // 2. Title Template (Appears in Browser Tab & Google Search)
   title: {
@@ -33,7 +33,10 @@ export const metadata: Metadata = {
 
   // 5. Authors & Creator
   authors: [
-    { name: "Code Crafters Team", url: "https://code-crafters.vercel.app" },
+    {
+      name: "Code Crafters Team",
+      url: "https://code-crafters-peach.vercel.app",
+    },
   ],
   creator: "Code Crafters",
 

@@ -1,13 +1,14 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://your-domain.com'; // REPLACE THIS
+  // UPDATE BASE URL
+  const baseUrl = 'https://code-crafters-peach.vercel.app'; 
 
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/private/', // Example: Block private admin folders
+      disallow: '/private/',
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };

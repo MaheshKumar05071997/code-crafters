@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://your-domain.com'; // REPLACE THIS
+  // UPDATE BASE URL
+  const baseUrl = 'https://code-crafters-peach.vercel.app'; 
 
   return [
     {
@@ -10,6 +11,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
-    // If you had more pages like /about, you would list them here
   ];
 }

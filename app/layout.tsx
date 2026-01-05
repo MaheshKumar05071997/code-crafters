@@ -29,6 +29,15 @@ export const metadata: Metadata = {
     "Bill Reminder App Developer",
     "Staff Attendance System",
     "Small Business Automation",
+
+    // Your Name & Brand (So people find YOU)
+    "Mahesh Kumar",
+    "Mahesh",
+    "Mahesh Vishwakarma",
+    "Mahesh Kumar Vishwakarma",
+    "Mahesh Kumar Developer",
+    "Mahesh Code Crafters",
+    "Code Crafters Agency",
   ],
 
   // 5. Authors & Creator
@@ -63,7 +72,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mahesh Kumar | Full Stack Developer",
     description: "Building custom apps for business growth.",
-    images: ["/profile_image.jpg"],
+    images: [
+      {
+        url: "/profile_image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Code Crafters Portfolio",
+      },
+    ],
   },
 
   // 8. Robots (Tell Google it's okay to scan this site)

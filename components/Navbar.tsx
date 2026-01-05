@@ -102,26 +102,34 @@ export default function Navbar() {
 
         {/* MOBILE DROPDOWN MENU */}
         {isOpen && (
-          <div className="md:hidden bg-slate-900 border-t border-gray-800">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="md:hidden bg-slate-900 border-t border-gray-800 shadow-xl rounded-b-2xl">
+            <div className="px-4 pt-4 pb-6 space-y-2">
               <a
                 href="#work"
                 onClick={(e) => handleScroll(e, "#work")}
-                className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+                className="block px-3 py-3 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
               >
                 Work
               </a>
               <a
                 href="#services"
                 onClick={(e) => handleScroll(e, "#services")}
-                className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+                className="block px-3 py-3 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
               >
                 Services
+              </a>
+              {/* Added Missing ABOUT Link */}
+              <a
+                href="#about"
+                onClick={(e) => handleScroll(e, "#about")}
+                className="block px-3 py-3 text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+              >
+                About
               </a>
               <a
                 href="#contact"
                 onClick={(e) => handleScroll(e, "#contact")}
-                className="block px-3 py-2 text-teal-400 font-bold"
+                className="block px-3 py-3 text-teal-400 font-bold bg-slate-800/50 rounded-md mt-2"
               >
                 Hire Me
               </a>

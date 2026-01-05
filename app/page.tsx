@@ -50,7 +50,7 @@ export default function Home() {
       {/* 1. HERO */}
       <section
         id="home"
-        className="min-h-screen flex flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden"
+        className="min-h-screen flex flex-col items-center justify-center px-6 pb-6 pt-28 md:p-12 relative overflow-hidden"
       >
         {/* Backgrounds */}
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-500/10 rounded-full blur-[120px]" />

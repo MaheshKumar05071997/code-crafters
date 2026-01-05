@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
   // 2. Title Template (Appears in Browser Tab & Google Search)
   title: {
-    default: "Code Crafters | Digital Product Studio",
+    default: "Code Crafters | Digital Product Development",
     template: "%s | Code Crafters",
   },
 
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://code-crafters.vercel.app",
-    title: "Code Crafters | Digital Product Studio",
+    title: "Code Crafters | Digital Product Development",
     description: "We build apps that solve real business problems.",
     siteName: "Code Crafters",
     images: [

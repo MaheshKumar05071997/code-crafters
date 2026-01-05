@@ -23,7 +23,7 @@ export default function Home() {
     logo: "https://code-crafters-peach.vercel.app/profile_image.jpg",
     telephone: "+91-9880567308",
     description:
-      "Digital Product Studio specializing in Business Automation and App Development.",
+      "Digital Product Development specializing in Business Automation and App Development.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Bangalore",
@@ -62,7 +62,7 @@ export default function Home() {
             {/* AGENCY LABEL */}
             <div className="inline-block px-3 py-1 border border-teal-500/30 rounded-full bg-teal-500/10 backdrop-blur-sm">
               <p className="text-teal-400 text-xs md:text-sm font-bold tracking-widest uppercase">
-                Digital Product Studio
+                Digital Product Development
               </p>
             </div>
 

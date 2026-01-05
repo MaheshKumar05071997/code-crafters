@@ -71,14 +71,15 @@ export default function Contact() {
       isValid = false;
     }
 
-    // 4. Message Word Count Validation (Min 20 words)
+    // 4. Message Word Count Validation (Min 10 words)
     const wordCount = formData.message
       .trim()
       .split(/\s+/)
       .filter((w) => w.length > 0).length;
-    if (wordCount < 20) {
+    // CHANGED FROM 20 TO 10 HERE
+    if (wordCount < 10) {
       newErrors.message = `Description is too short. Please add ${
-        20 - wordCount
+        10 - wordCount
       } more words.`;
       isValid = false;
     }
@@ -312,7 +313,7 @@ export default function Contact() {
                         .split(/\s+/)
                         .filter((w) => w.length > 0).length
                     }{" "}
-                    / 20
+                    / 10
                   </p>
                 </div>
               </div>

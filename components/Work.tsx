@@ -1,6 +1,25 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Work() {
+  const clients = [
+    "Riddihi Profile",
+    "Magpie India",
+    "Mukesh Interior Works",
+    "Vishwakarma Interior Products",
+    "Profile Cut Optimizer",
+  ];
+  const [currentClient, setCurrentClient] = useState(0);
+
+  const nextClient = () => {
+    setCurrentClient((prev) => (prev === clients.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevClient = () => {
+    setCurrentClient((prev) => (prev === 0 ? clients.length - 1 : prev - 1));
+  };
+
   const projects = [
     {
       id: 1,
@@ -105,11 +124,172 @@ export default function Work() {
         },
       ],
     },
+    {
+      id: 4,
+      title: "Profile Cut Optimizer",
+      category: "Web Application",
+      description:
+        "A specialized optimization tool built for precision profile cutting and material management. Designed to streamline industrial manufacturing workflows.",
+      link: "https://profilecut-optimizer.vercel.app/",
+      image:
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
+      tech: [
+        {
+          name: "Next.js",
+          icon: (
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.9 16.7L10.3 7.8v8.6H8.7V5.9h1.7l6.6 8.9V5.9h1.6v10.8h-1.7z" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: 5,
+      title: "Magpie India",
+      category: "Business Website",
+      description:
+        "A high-performance corporate platform showcasing industrial services, global presence, and enterprise-grade manufacturing capabilities.",
+      link: "https://magpieindiainfo.vercel.app/",
+      image:
+        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
+      tech: [
+        {
+          name: "Next.js",
+          icon: (
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.9 16.7L10.3 7.8v8.6H8.7V5.9h1.7l6.6 8.9V5.9h1.6v10.8h-1.7z" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: 6,
+      title: "Riddihi Profile",
+      category: "Web Application",
+      description:
+        "A secure digital portal dedicated to streamlining client interactions, cataloging architectural profiles, and automating business inquiries.",
+      link: "https://riddhi-profiles-app.vercel.app/",
+      image:
+        "https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&q=80&w=800",
+      tech: [
+        {
+          name: "React",
+          icon: (
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-1.3 0-2.6 0.2-3.8 0.5C6.1 1.1 4.2 2.1 2.9 3.4 1 5.3 0 7.8 0 10.5s1 5.2 2.9 7.1c1.3 1.3 3.2 2.3 5.3 2.9 1.2 0.4 2.5 0.5 3.8 0.5s2.6-0.2 3.8-0.5c2.1-0.6 4-1.6 5.3-2.9 1.9-1.9 2.9-4.4 2.9-7.1s-1-5.2-2.9-7.1c-1.3-1.3-3.2-2.3-5.3-2.9C14.6 0.2 13.3 0 12 0zm0 2.2c1.1 0 2.1 0.1 3.2 0.4 1.7 0.5 3.2 1.3 4.3 2.4 1.5 1.5 2.3 3.5 2.3 5.5s-0.8 4-2.3 5.5c-1.1 1.1-2.6 1.9-4.3 2.4 -1.1 0.3-2.1 0.4-3.2 0.4s-2.1-0.1-3.2-0.4c-1.7-0.5-3.2-1.3-4.3-2.4 -1.5-1.5-2.3-3.5-2.3-5.5s0.8-4 2.3-5.5c1.1-1.1 2.6-1.9 4.3-2.4C9.9 2.3 10.9 2.2 12 2.2zM12 4.9c-3.1 0-5.6 2.5-5.6 5.6s2.5 5.6 5.6 5.6 5.6-2.5 5.6-5.6S15.1 4.9 12 4.9z" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: 7,
+      title: "Mukesh Interior Works",
+      category: "Portfolio Website",
+      description:
+        "An elegant, visually-driven portfolio designed to highlight premium interior design projects, architectural services, and client testimonials.",
+      link: "https://www.mukeshinteriors.com/",
+      image:
+        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800",
+      tech: [
+        {
+          name: "Tailwind CSS",
+          icon: (
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 12c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6 -2.7 6-6 6zm12 12c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6 -2.7 6-6 6z" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: 8,
+      title: "Vishwakarma Interior Products",
+      category: "E-Commerce / Business Portal",
+      description:
+        "A comprehensive digital catalog and business gateway for VIP Online, allowing seamless browsing of premium interior materials and hardware.",
+      link: "https://viponline.in/",
+      image:
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+      tech: [
+        {
+          name: "Next.js",
+          icon: (
+            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.9 16.7L10.3 7.8v8.6H8.7V5.9h1.7l6.6 8.9V5.9h1.6v10.8h-1.7z" />
+            </svg>
+          ),
+        },
+      ],
+    },
   ];
 
   return (
     <section id="work" className="py-20 bg-slate-950 text-white">
       <div className="max-w-screen-xl mx-auto px-6 md:px-12">
+        {/* Trusted Clients Section */}
+        <div className="mb-24 pb-16 border-b border-white/5">
+          <p className="text-center text-xs md:text-sm font-bold text-gray-500 uppercase tracking-widest mb-8">
+            Trusted By Industry Leaders
+          </p>
+
+          {/* Interactive Pill Carousel */}
+          <div className="flex justify-center items-center w-full px-4">
+            <div className="flex items-center justify-between w-full max-w-lg px-2 py-2 md:py-3 bg-slate-900 border border-teal-500/30 rounded-full shadow-[0_0_20px_rgba(45,212,191,0.1)]">
+              {/* Previous Button */}
+              <button
+                onClick={prevClient}
+                className="w-10 h-10 md:w-12 md:h-12 flex shrink-0 items-center justify-center rounded-full bg-slate-950 text-teal-400 hover:bg-teal-500 hover:text-black transition-colors focus:outline-none border border-gray-800"
+                aria-label="Previous client"
+              >
+                <svg
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Client Name (The Pill Center) */}
+              <div className="flex-1 px-2 md:px-4 overflow-hidden text-center">
+                <h3 className="text-xs sm:text-sm md:text-lg font-extrabold text-white tracking-widest uppercase truncate transition-all duration-300">
+                  {clients[currentClient]}
+                </h3>
+              </div>
+
+              {/* Next Button */}
+              <button
+                onClick={nextClient}
+                className="w-10 h-10 md:w-12 md:h-12 flex shrink-0 items-center justify-center rounded-full bg-slate-950 text-teal-400 hover:bg-teal-500 hover:text-black transition-colors focus:outline-none border border-gray-800"
+                aria-label="Next client"
+              >
+                <svg
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Section Heading */}
         <div className="mb-16">
           <p className="text-teal-400 font-bold tracking-widest uppercase mb-2">
@@ -150,9 +330,21 @@ export default function Work() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-teal-300 transition-colors">
-                  {project.title}
-                </h3>
+                <div className="flex items-start justify-between mb-2 gap-4">
+                  <h3 className="text-xl font-bold text-white group-hover:text-teal-300 transition-colors leading-tight">
+                    {project.title}
+                  </h3>
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 px-4 py-1.5 bg-teal-500/10 text-teal-400 border border-teal-500/30 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider hover:bg-teal-500 hover:text-black hover:shadow-[0_0_15px_rgba(45,212,191,0.4)] transition-all"
+                    >
+                      Visit Live
+                    </a>
+                  )}
+                </div>
 
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">
                   {project.description}

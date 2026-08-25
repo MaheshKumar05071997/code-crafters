@@ -1,370 +1,233 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
+
+import {
+  ArrowUpRight,
+  Smartphone,
+  Monitor,
+  Code,
+  Rocket,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { useState, useRef } from "react";
+import Link from "next/link";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Work() {
-  const clients = [
-    "Riddihi Profile",
-    "Magpie India",
-    "Mukesh Interior Works",
-    "Vishwakarma Interior Products",
-    "Profile Cut Optimizer",
+  const workRef = useRef<HTMLDivElement>(null);
+  const [activeFilter, setActiveFilter] = useState("All Projects");
+
+  const filters = [
+    "All Projects",
+    "Web Applications",
+    "Mobile Apps",
+    "Dashboards",
+    "E-commerce",
+    "SaaS",
   ];
-  const [currentClient, setCurrentClient] = useState(0);
 
-  const nextClient = () => {
-    setCurrentClient((prev) => (prev === clients.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevClient = () => {
-    setCurrentClient((prev) => (prev === 0 ? clients.length - 1 : prev - 1));
-  };
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ".gsap-work-card",
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: workRef.current,
+            start: "top 80%",
+          },
+        },
+      );
+    },
+    { scope: workRef },
+  );
 
   const projects = [
     {
       id: 1,
       title: "Smart Bill Reminder",
-      category: "Android Development",
-      description:
-        "A native Android application designed to help users track monthly payments, avoid late fees, and manage personal finances efficiently.",
+      desc: "Android app that helps users track bills, set reminders, and avoid late payment charges.",
+      category: "Android App",
       image: "/launcher_icon.png",
-      tech: [
-        {
-          name: "Kotlin",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M1.3 24l11.3-11.5L24 24zM0 0h12L0 12.5zM13.4 0L0 14v10l12-12L24 0z" />
-            </svg>
-          ),
-        },
-        {
-          name: "Android SDK",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.6 2.8C17.6 2.8 17.6 2.8 17.6 2.8c-0.3 0-0.6 0.1-0.9 0.4l-2.1 3.7c-1.7-0.7-3.5-1.1-5.4-1.1c-1.9 0-3.7 0.4-5.4 1.1L1.7 3.1C1.5 2.9 1.1 2.8 0.8 2.8c-0.6 0-1 0.4-1 1c0 0.3 0.1 0.5 0.3 0.7l2.2 3.8C0.9 10.4 0 13.1 0 16.1h18.3c0-3-0.9-5.7-2.4-7.8l2.2-3.8c0.2-0.2 0.3-0.5 0.3-0.7C18.5 3.2 18.1 2.8 17.6 2.8z M5.6 12.8c-0.7 0-1.2-0.6-1.2-1.2c0-0.7 0.6-1.2 1.2-1.2c0.7 0 1.2 0.6 1.2 1.2C6.8 12.2 6.3 12.8 5.6 12.8z M12.8 12.8c-0.7 0-1.2-0.6-1.2-1.2c0-0.7 0.6-1.2 1.2-1.2c0.7 0 1.2 0.6 1.2 1.2C14 12.2 13.5 12.8 12.8 12.8z" />
-            </svg>
-          ),
-        },
-        {
-          name: "Google Sheets",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M14.5 0H3.8C2.8 0 2 0.8 2 1.9v20.2C2 23.2 2.8 24 3.8 24h16.4c1 0 1.8-0.8 1.8-1.9V7.5L14.5 0zM13.8 16.5H6.2v-1.9h7.6v1.9zM13.8 12.8H6.2v-1.9h7.6v1.9zM13.8 9H6.2V7.1h7.6V9zM15.2 6.8V1.9l4.8 4.9h-4.8z" />
-            </svg>
-          ),
-        },
-      ],
+      icon: <Smartphone size={20} className="text-[#059669]" />,
+      bg: "bg-[#ECFDF5]", // Light Green
+      tagColor: "text-[#059669] bg-[#D1FAE5]",
+      btnColor: "text-[#059669] hover:bg-[#D1FAE5]",
     },
     {
       id: 2,
       title: "Staff Attendance Portal",
+      desc: "Web platform to track employee attendance, leave, and working hours with real-time reports.",
       category: "Web Application",
-      description:
-        "A secure web-based system for businesses to track employee attendance, calculate hours automatically, and generate monthly reports.",
       image: "/attendance_project.jpg",
-      tech: [
-        {
-          name: "React.js",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-1.3 0-2.6 0.2-3.8 0.5C6.1 1.1 4.2 2.1 2.9 3.4 1 5.3 0 7.8 0 10.5s1 5.2 2.9 7.1c1.3 1.3 3.2 2.3 5.3 2.9 1.2 0.4 2.5 0.5 3.8 0.5s2.6-0.2 3.8-0.5c2.1-0.6 4-1.6 5.3-2.9 1.9-1.9 2.9-4.4 2.9-7.1s-1-5.2-2.9-7.1c-1.3-1.3-3.2-2.3-5.3-2.9C14.6 0.2 13.3 0 12 0zm0 2.2c1.1 0 2.1 0.1 3.2 0.4 1.7 0.5 3.2 1.3 4.3 2.4 1.5 1.5 2.3 3.5 2.3 5.5s-0.8 4-2.3 5.5c-1.1 1.1-2.6 1.9-4.3 2.4 -1.1 0.3-2.1 0.4-3.2 0.4s-2.1-0.1-3.2-0.4c-1.7-0.5-3.2-1.3-4.3-2.4 -1.5-1.5-2.3-3.5-2.3-5.5s0.8-4 2.3-5.5c1.1-1.1 2.6-1.9 4.3-2.4C9.9 2.3 10.9 2.2 12 2.2zM12 4.9c-3.1 0-5.6 2.5-5.6 5.6s2.5 5.6 5.6 5.6 5.6-2.5 5.6-5.6S15.1 4.9 12 4.9z" />
-            </svg>
-          ),
-        },
-        {
-          name: "Node.js",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0L1.6 6v12L12 24l10.4-6V6L12 0zM11 18H9v-6h2v6zm4 0h-2v-6h2v6zm-2-8c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z" />
-            </svg>
-          ),
-        },
-        {
-          name: "Supabase",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21.2 11.4C21.2 11.4 12.8 0 12.8 0S4.4 11.4 4.4 11.4C3.8 12.2 3.8 13.3 4.3 14L11.5 24l7.1-10C19.2 13.3 19.2 12.2 21.2 11.4z" />
-            </svg>
-          ),
-        },
-      ],
+      icon: <Monitor size={20} className="text-[#6D28D9]" />,
+      bg: "bg-[#F5F3FF]", // Light Purple
+      tagColor: "text-[#6D28D9] bg-[#EDE9FE]",
+      btnColor: "text-[#6D28D9] hover:bg-[#EDE9FE]",
     },
     {
       id: 3,
       title: "Business Portfolio Sites",
+      desc: "High-performance websites built for businesses to establish credibility and engage customers.",
       category: "Web Design & Dev",
-      description:
-        "Custom, high-performance websites built for small businesses to establish digital presence and attract more local clients.",
       image:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-      tech: [
-        {
-          name: "Next.js",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.9 16.7L10.3 7.8v8.6H8.7V5.9h1.7l6.6 8.9V5.9h1.6v10.8h-1.7z" />
-            </svg>
-          ),
-        },
-        {
-          name: "Tailwind",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6 12c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6 -2.7 6-6 6zm12 12c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6 -2.7 6-6 6z" />
-            </svg>
-          ),
-        },
-        {
-          name: "SEO",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21.7 13.6l-2.3-2.3c0.4-0.9 0.6-1.9 0.6-3 0-4.1-3.4-7.5-7.5-7.5S5 4.2 5 8.3c0 4.1 3.4 7.5 7.5 7.5 1.1 0 2.1-0.2 3-0.6l2.3 2.3c-0.2 0.3-0.3 0.6-0.3 0.9 0 1.5 1.2 2.7 2.7 2.7S23 19.8 23 18.3C23 17.1 22.2 16 21.1 15.6zM12.5 13.8c-3 0-5.5-2.5-5.5-5.5s2.5-5.5 5.5-5.5 5.5 2.5 5.5 5.5S15.5 13.8 12.5 13.8z" />
-            </svg>
-          ),
-        },
-      ],
-    },
-    {
-      id: 4,
-      title: "Profile Cut Optimizer",
-      category: "Web Application",
-      description:
-        "A specialized optimization tool built for precision profile cutting and material management. Designed to streamline industrial manufacturing workflows.",
-      link: "https://profilecut-optimizer.vercel.app/",
-      image:
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
-      tech: [
-        {
-          name: "Next.js",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.9 16.7L10.3 7.8v8.6H8.7V5.9h1.7l6.6 8.9V5.9h1.6v10.8h-1.7z" />
-            </svg>
-          ),
-        },
-      ],
-    },
-    {
-      id: 5,
-      title: "Magpie India",
-      category: "Business Website",
-      description:
-        "A high-performance corporate platform showcasing industrial services, global presence, and enterprise-grade manufacturing capabilities.",
-      link: "https://magpieindiainfo.vercel.app/",
-      image:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
-      tech: [
-        {
-          name: "Next.js",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.9 16.7L10.3 7.8v8.6H8.7V5.9h1.7l6.6 8.9V5.9h1.6v10.8h-1.7z" />
-            </svg>
-          ),
-        },
-      ],
-    },
-    {
-      id: 6,
-      title: "Riddihi Profile",
-      category: "Web Application",
-      description:
-        "A secure digital portal dedicated to streamlining client interactions, cataloging architectural profiles, and automating business inquiries.",
-      link: "https://riddhi-profiles-app.vercel.app/",
-      image:
-        "https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&q=80&w=800",
-      tech: [
-        {
-          name: "React",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-1.3 0-2.6 0.2-3.8 0.5C6.1 1.1 4.2 2.1 2.9 3.4 1 5.3 0 7.8 0 10.5s1 5.2 2.9 7.1c1.3 1.3 3.2 2.3 5.3 2.9 1.2 0.4 2.5 0.5 3.8 0.5s2.6-0.2 3.8-0.5c2.1-0.6 4-1.6 5.3-2.9 1.9-1.9 2.9-4.4 2.9-7.1s-1-5.2-2.9-7.1c-1.3-1.3-3.2-2.3-5.3-2.9C14.6 0.2 13.3 0 12 0zm0 2.2c1.1 0 2.1 0.1 3.2 0.4 1.7 0.5 3.2 1.3 4.3 2.4 1.5 1.5 2.3 3.5 2.3 5.5s-0.8 4-2.3 5.5c-1.1 1.1-2.6 1.9-4.3 2.4 -1.1 0.3-2.1 0.4-3.2 0.4s-2.1-0.1-3.2-0.4c-1.7-0.5-3.2-1.3-4.3-2.4 -1.5-1.5-2.3-3.5-2.3-5.5s0.8-4 2.3-5.5c1.1-1.1 2.6-1.9 4.3-2.4C9.9 2.3 10.9 2.2 12 2.2zM12 4.9c-3.1 0-5.6 2.5-5.6 5.6s2.5 5.6 5.6 5.6 5.6-2.5 5.6-5.6S15.1 4.9 12 4.9z" />
-            </svg>
-          ),
-        },
-      ],
-    },
-    {
-      id: 7,
-      title: "Mukesh Interior Works",
-      category: "Portfolio Website",
-      description:
-        "An elegant, visually-driven portfolio designed to highlight premium interior design projects, architectural services, and client testimonials.",
-      link: "https://www.mukeshinteriors.com/",
-      image:
-        "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800",
-      tech: [
-        {
-          name: "Tailwind CSS",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6 12c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6 -2.7 6-6 6zm12 12c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6 -2.7 6-6 6z" />
-            </svg>
-          ),
-        },
-      ],
-    },
-    {
-      id: 8,
-      title: "Vishwakarma Interior Products",
-      category: "E-Commerce / Business Portal",
-      description:
-        "A comprehensive digital catalog and business gateway for VIP Online, allowing seamless browsing of premium interior materials and hardware.",
-      link: "https://viponline.in/",
-      image:
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
-      tech: [
-        {
-          name: "Next.js",
-          icon: (
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.9 16.7L10.3 7.8v8.6H8.7V5.9h1.7l6.6 8.9V5.9h1.6v10.8h-1.7z" />
-            </svg>
-          ),
-        },
-      ],
+      icon: <Code size={20} className="text-[#0284C7]" />,
+      bg: "bg-[#F0F9FF]", // Light Blue
+      tagColor: "text-[#0284C7] bg-[#E0F2FE]",
+      btnColor: "text-[#0284C7] hover:bg-[#E0F2FE]",
     },
   ];
 
   return (
-    <section id="work" className="py-20 bg-slate-950 text-white">
-      <div className="max-w-screen-xl mx-auto px-6 md:px-12">
-        {/* Trusted Clients Section */}
-        <div className="mb-24 pb-16 border-b border-white/5">
-          <p className="text-center text-xs md:text-sm font-bold text-gray-500 uppercase tracking-widest mb-8">
-            Trusted By Industry Leaders
-          </p>
-
-          {/* Interactive Pill Carousel */}
-          <div className="flex justify-center items-center w-full px-4">
-            <div className="flex items-center justify-between w-full max-w-lg px-2 py-2 md:py-3 bg-slate-900 border border-teal-500/30 rounded-full shadow-[0_0_20px_rgba(45,212,191,0.1)]">
-              {/* Previous Button */}
-              <button
-                onClick={prevClient}
-                className="w-10 h-10 md:w-12 md:h-12 flex shrink-0 items-center justify-center rounded-full bg-slate-950 text-teal-400 hover:bg-teal-500 hover:text-black transition-colors focus:outline-none border border-gray-800"
-                aria-label="Previous client"
-              >
-                <svg
-                  className="w-5 h-5 md:w-6 md:h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-
-              {/* Client Name (The Pill Center) */}
-              <div className="flex-1 px-2 md:px-4 overflow-hidden text-center">
-                <h3 className="text-xs sm:text-sm md:text-lg font-extrabold text-white tracking-widest uppercase truncate transition-all duration-300">
-                  {clients[currentClient]}
-                </h3>
-              </div>
-
-              {/* Next Button */}
-              <button
-                onClick={nextClient}
-                className="w-10 h-10 md:w-12 md:h-12 flex shrink-0 items-center justify-center rounded-full bg-slate-950 text-teal-400 hover:bg-teal-500 hover:text-black transition-colors focus:outline-none border border-gray-800"
-                aria-label="Next client"
-              >
-                <svg
-                  className="w-5 h-5 md:w-6 md:h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-            </div>
+    <section
+      id="work"
+      ref={workRef}
+      className="py-24 bg-[#0B0F19] text-white overflow-hidden font-sans border-t border-[#1E293B]"
+    >
+      <div className="max-w-screen-xl mx-auto px-6 md:px-12 relative">
+        {/* HEADER SECTION */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
+          <div className="max-w-2xl">
+            <p className="text-[#00E5B5] text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+              FEATURED WORK
+            </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 text-white">
+              Projects that speak{" "}
+              <span className="text-[#00E5B5]">results.</span>
+            </h2>
+            <p className="text-gray-400 text-base md:text-lg font-medium leading-relaxed">
+              Every project is built with a purpose — to solve real problems,
+              deliver value, and drive measurable impact.
+            </p>
           </div>
+
+          {/* FUNCTIONAL VIEW ALL BUTTON */}
+          <Link
+            href="/projects"
+            className="px-6 py-3 bg-[#131C2D] border border-[#1E293B] hover:border-[#00E5B5] text-white rounded-full text-sm font-bold flex items-center gap-2 transition-all shadow-sm hover:text-[#00E5B5] shrink-0"
+          >
+            View All Projects <ArrowUpRight size={16} />
+          </Link>
         </div>
 
-        {/* Section Heading */}
-        <div className="mb-16">
-          <p className="text-teal-400 font-bold tracking-widest uppercase mb-2">
-            My Portfolio
-          </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white">
-            Recent{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
-              Projects.
-            </span>
-          </h2>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="group relative bg-slate-900 border border-gray-800 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(45,212,191,0.15)]"
+        {/* PILL FILTERS */}
+        <div className="flex overflow-x-auto hide-scrollbar gap-3 mb-12 pb-2">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 border ${
+                activeFilter === filter
+                  ? "bg-[#00E5B5] text-[#0B0F19] border-[#00E5B5]"
+                  : "bg-[#131C2D] text-gray-400 border-[#1E293B] hover:text-white"
+              }`}
             >
-              {/* Image Container with Zoom Effect */}
-              <div className="relative h-56 w-full overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-80"
-                />
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
-              </div>
+              {filter}
+              {activeFilter === filter && (
+                <div className="w-1.5 h-1.5 bg-[#0B0F19] rounded-full"></div>
+              )}
+            </button>
+          ))}
+        </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-bold text-teal-400 uppercase tracking-wider">
-                    {project.category}
-                  </span>
+        {/* CARDS GRID & CAROUSEL UI */}
+        <div className="relative group">
+          {/* Floating Arrows */}
+          <button className="hidden lg:flex absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-[#131C2D] border border-[#1E293B] text-[#00E5B5] shadow-lg z-20 hover:scale-110 transition-transform hover:text-white">
+            <ChevronLeft size={24} />
+          </button>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className={`gsap-work-card ${project.bg} rounded-[2rem] p-8 flex flex-col relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl min-h-[480px]`}
+              >
+                {/* Icon */}
+                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 z-10">
+                  {project.icon}
                 </div>
 
-                <div className="flex items-start justify-between mb-2 gap-4">
-                  <h3 className="text-xl font-bold text-white group-hover:text-teal-300 transition-colors leading-tight">
+                {/* Text Content */}
+                <div className="relative z-10 w-[85%]">
+                  <h3 className="font-extrabold text-2xl text-[#0B0F19] mb-3 leading-tight">
                     {project.title}
                   </h3>
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 px-4 py-1.5 bg-teal-500/10 text-teal-400 border border-teal-500/30 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider hover:bg-teal-500 hover:text-black hover:shadow-[0_0_15px_rgba(45,212,191,0.4)] transition-all"
-                    >
-                      Visit Live
-                    </a>
-                  )}
+                  <p className="text-gray-600 text-sm font-medium leading-relaxed mb-8">
+                    {project.desc}
+                  </p>
                 </div>
 
-                <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  {project.description}
-                </p>
+                {/* Tags & Explore Button at Bottom */}
+                <div className="mt-auto flex items-center justify-between relative z-10">
+                  <span
+                    className={`text-[11px] font-bold px-4 py-2 rounded-lg flex items-center gap-2 ${project.tagColor}`}
+                  >
+                    <Monitor size={14} /> {project.category}
+                  </span>
+                  <Link
+                    href="/projects"
+                    className={`text-[13px] font-bold px-4 py-2 rounded-lg flex items-center gap-1 transition-colors ${project.btnColor}`}
+                  >
+                    Explore <ArrowUpRight size={14} />
+                  </Link>
+                </div>
 
-                {/* Tech Stack Tags with Icons */}
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-300 bg-gray-800/50 rounded-full border border-gray-700 hover:border-teal-500/50 hover:text-teal-400 transition-colors"
-                    >
-                      {tech.icon}
-                      {tech.name}
-                    </span>
-                  ))}
+                {/* Mockup Image Positioned bottom right */}
+                <div className="absolute -bottom-10 -right-10 w-[85%] h-[55%] rounded-tl-2xl overflow-hidden shadow-2xl rotate-[-5deg] group-hover:rotate-0 transition-all duration-500">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
+            ))}
+          </div>
+
+          <button className="hidden lg:flex absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-[#131C2D] border border-[#1E293B] text-[#00E5B5] shadow-lg z-20 hover:scale-110 transition-transform hover:text-white">
+            <ChevronRight size={24} />
+          </button>
+        </div>
+
+        {/* Carousel Dots */}
+        <div className="flex justify-center items-center gap-2 mt-10">
+          <div className="w-8 h-2 rounded-full bg-[#00E5B5]"></div>
+          <div className="w-2 h-2 rounded-full bg-[#1E293B]"></div>
+          <div className="w-2 h-2 rounded-full bg-[#1E293B]"></div>
+        </div>
+
+        {/* BOTTOM CTA BAR */}
+        <div className="mt-16 bg-[#ECFDF5] rounded-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-6">
+            <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0">
+              <Rocket size={24} className="text-[#00E5B5]" />
             </div>
-          ))}
+            <div>
+              <h4 className="text-[#0B0F19] text-xl md:text-2xl font-extrabold mb-1">
+                Have a project in mind?
+              </h4>
+              <p className="text-gray-600 text-sm md:text-base font-medium">
+                Let's build something impactful together.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/#contact"
+            className="w-full md:w-auto px-8 py-4 bg-[#00E5B5] hover:bg-[#00c99f] text-[#0B0F19] font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition-all shadow-[0_8px_20px_rgba(0,229,181,0.2)] shrink-0"
+          >
+            Let's Work Together <ArrowUpRight size={18} />
+          </Link>
         </div>
       </div>
     </section>

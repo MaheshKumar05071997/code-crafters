@@ -1,11 +1,37 @@
 "use client";
+import Stats from "../components/Stats";
+import Clients from "../components/Clients";
 import Work from "../components/Work";
-import Services from "../components/Services";
+import Expertise from "../components/Expertise";
+import Testimonials from "../components/Testimonials";
+import CTA from "../components/CTA";
 import Contact from "../components/Contact";
 import About from "../components/About";
 import HeroAnimation from "../components/HeroAnimation";
+import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function Home() {
+  const container = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ".gsap-hero-item",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" },
+      );
+      gsap.fromTo(
+        ".gsap-hero-img",
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1, delay: 0.2, ease: "expo.out" },
+      );
+    },
+    { scope: container },
+  );
+
   // Custom scroll function for buttons
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -48,59 +74,59 @@ export default function Home() {
       />
 
       {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION */}
       <section
         id="home"
-        className="min-h-screen flex flex-col items-center justify-center px-6 pb-6 pt-28 md:p-12 relative overflow-hidden"
+        ref={container}
+        className="min-h-screen flex flex-col items-center justify-center px-6 pb-6 pt-32 md:p-12 relative overflow-hidden bg-[#070B14]"
       >
-        {/* Backgrounds */}
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-500/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px]" />
+        {/* Background Glows */}
+        <div className="absolute top-[20%] left-[-10%] w-[50%] h-[50%] bg-[#00E5B5]/10 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#0070f3]/10 rounded-full blur-[150px] pointer-events-none" />
 
-        <div className="z-10 max-w-screen-xl w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12 font-sans">
+        <div className="z-10 max-w-screen-xl w-full flex flex-col lg:flex-row items-center justify-between gap-12 font-sans mt-10">
           {/* LEFT SIDE: Text */}
-          <div className="lg:w-[65%] flex flex-col items-start space-y-8 text-left">
-            {/* AGENCY LABEL */}
-            <div className="inline-block px-3 py-1 border border-teal-500/30 rounded-full bg-teal-500/10 backdrop-blur-sm">
-              <p className="text-teal-400 text-xs md:text-sm font-bold tracking-widest uppercase">
-                Digital Product Development
-              </p>
+          <div className="lg:w-[60%] flex flex-col items-start space-y-6 text-left">
+            {/* FULL STACK DEVELOPER LABEL */}
+            <div className="gsap-hero-item flex items-center gap-2 px-4 py-2 rounded-full bg-[#131C2D] border border-[#1E293B] w-fit shadow-sm">
+              <div className="w-2 h-2 rounded-full bg-[#00E5B5]"></div>
+              <span className="text-[10px] md:text-xs text-[#00E5B5] font-bold tracking-[0.2em] uppercase">
+                FULL STACK DEVELOPER
+              </span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.1] tracking-tight">
-              Turn Your <br />
+            <h1 className="gsap-hero-item text-5xl md:text-6xl lg:text-[5.5rem] font-extrabold text-white leading-[1.1] tracking-tight">
+              Turn Your <br className="hidden md:block" />
               Business Goals Into <br />
-              <span className="animate-shimmer bg-[linear-gradient(110deg,#2dd4bf,45%,#ffffff,55%,#3b82f6)] bg-[length:200%_100%] text-transparent bg-clip-text">
+              <span className="animate-shimmer bg-[linear-gradient(110deg,#00E5B5,45%,#ffffff,55%,#0070f3)] bg-[length:200%_100%] text-transparent bg-clip-text">
                 Digital Success.
               </span>
             </h1>
 
-            <p className="text-gray-400 text-lg md:text-2xl max-w-2xl leading-relaxed">
-              I don't just write code. I build custom, scalable software that
-              solves real problems and drives your business forward.
+            <p className="gsap-hero-item text-[#8B95A5] text-base md:text-lg max-w-xl leading-relaxed font-medium">
+              I'm a Full Stack Developer who helps businesses turn ideas into
+              powerful digital products. I focus on performance, reliability,
+              and clean code to deliver solutions that matter.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-5 pt-4 w-full sm:w-auto">
-              <button
-                onClick={() => scrollToSection("work")}
-                className="px-10 py-4 bg-teal-500 hover:bg-teal-600 text-black text-lg font-bold rounded-full transition-all shadow-[0_0_30px_rgba(45,212,191,0.4)] hover:shadow-[0_0_40px_rgba(45,212,191,0.6)] hover:-translate-y-1"
-              >
-                View My Work
-              </button>
+            <div className="gsap-hero-item flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
               <button
                 onClick={() => scrollToSection("contact")}
-                className="px-10 py-4 border border-gray-600 hover:border-teal-400 text-white text-lg rounded-full transition-all hover:bg-gray-800"
+                className="flex items-center justify-center gap-2 px-8 py-4 bg-[#00E5B5] hover:bg-[#00c99f] text-[#0B0F19] text-sm font-bold rounded-full transition-all shadow-[0_0_20px_rgba(0,229,181,0.2)] hover:shadow-[0_0_30px_rgba(0,229,181,0.4)]"
               >
-                Let's Connect
+                Let's Work Together <ArrowUpRight size={18} />
+              </button>
+              <button
+                onClick={() => scrollToSection("work")}
+                className="flex items-center justify-center gap-2 px-8 py-4 border border-[#1E293B] hover:border-[#00E5B5] bg-[#131C2D] text-white text-sm font-bold rounded-full transition-all hover:bg-[#1a253c]"
+              >
+                View My Work <ArrowUpRight size={18} />
               </button>
             </div>
           </div>
 
-          {/* RIGHT SIDE: HERO ANIMATION (Replaces the Image) */}
-          <div className="lg:w-[35%] flex justify-center lg:justify-end relative mt-12 lg:mt-0">
-            {/* Glow Effect */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[120%] h-[120%] bg-gradient-to-tr from-blue-600/20 to-teal-500/20 rounded-full blur-3xl"></div>
-
-            {/* The Animation Component */}
+          {/* RIGHT SIDE: HERO ANIMATION */}
+          <div className="gsap-hero-img lg:w-[40%] flex justify-center lg:justify-end relative mt-12 lg:mt-0 w-full">
             <div className="relative w-full max-w-[500px]">
               <HeroAnimation />
             </div>
@@ -108,16 +134,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. ABOUT */}
+      <Stats />
+      <Clients />
       <About />
-
-      {/* 3. WORK */}
       <Work />
-
-      {/* 4. SERVICES */}
-      <Services />
-
-      {/* 5. CONTACT */}
+      <Expertise />
+      <Testimonials />
+      <CTA />
       <Contact />
     </main>
   );

@@ -1,14 +1,26 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      navRef.current,
+      { y: -100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+    );
+  }, []);
 
   // This function handles the smooth scrolling WITHOUT changing the URL
   const handleScroll = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    href: string
+    href: string,
   ) => {
     e.preventDefault(); // <--- This stops the URL from changing to /#work
     const targetId = href.replace("#", "");
@@ -21,7 +33,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 transition-all duration-300 bg-slate-900/50 backdrop-blur-md border-b border-white/10">
+    <nav
+      ref={navRef}
+      className="fixed top-0 w-full z-50 transition-all duration-300 bg-[#070B14]/80 backdrop-blur-xl border-b border-[#1E293B]"
+    >
       <div className="max-w-screen-xl mx-auto px-6 md:px-12">
         <div className="flex items-center justify-between h-20">
           {/* LOGO */}
@@ -31,26 +46,19 @@ export default function Navbar() {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="text-2xl font-bold text-white tracking-tighter hover:text-teal-400 transition-colors"
+            className="text-xl md:text-2xl font-black text-white tracking-tight hover:opacity-80 transition-opacity"
           >
-            CODE<span className="text-teal-500">CRAFTERS</span>
+            CODECRAFTERS
           </Link>
 
           {/* DESKTOP MENU */}
           <div className="hidden md:flex space-x-8 items-center">
             <a
-              href="#work"
-              onClick={(e) => handleScroll(e, "#work")}
-              className="cursor-pointer text-gray-300 hover:text-white text-sm font-medium transition-colors"
+              href="#home"
+              onClick={(e) => handleScroll(e, "#home")}
+              className="cursor-pointer text-[#00E5B5] text-sm font-bold transition-colors"
             >
-              Work
-            </a>
-            <a
-              href="#services"
-              onClick={(e) => handleScroll(e, "#services")}
-              className="cursor-pointer text-gray-300 hover:text-white text-sm font-medium transition-colors"
-            >
-              Services
+              Home
             </a>
             <a
               href="#about"
@@ -60,9 +68,38 @@ export default function Navbar() {
               About
             </a>
             <a
+              href="#services"
+              onClick={(e) => handleScroll(e, "#services")}
+              className="cursor-pointer text-gray-300 hover:text-white text-sm font-medium transition-colors"
+            >
+              Services
+            </a>
+            <a
+              href="#work"
+              onClick={(e) => handleScroll(e, "#work")}
+              className="cursor-pointer text-gray-300 hover:text-white text-sm font-medium transition-colors"
+            >
+              Work
+            </a>
+            <a
+              href="#testimonials"
+              onClick={(e) => handleScroll(e, "#testimonials")}
+              className="cursor-pointer text-gray-300 hover:text-white text-sm font-medium transition-colors"
+            >
+              Testimonials
+            </a>
+            <a
+              href="#blog"
+              onClick={(e) => handleScroll(e, "#blog")}
+              className="cursor-pointer text-gray-300 hover:text-white text-sm font-medium transition-colors"
+            >
+              Blog
+            </a>
+
+            <a
               href="#contact"
               onClick={(e) => handleScroll(e, "#contact")}
-              className="cursor-pointer px-5 py-2 bg-teal-500 hover:bg-teal-600 text-black text-sm font-bold rounded-full transition-all shadow-[0_0_10px_rgba(45,212,191,0.3)]"
+              className="cursor-pointer px-6 py-2.5 bg-[#00E5B5] hover:bg-[#00c99f] text-[#0B0F19] text-sm font-bold rounded-full transition-all shadow-[0_0_15px_rgba(0,229,181,0.2)] flex items-center gap-1"
             >
               Hire Me
             </a>

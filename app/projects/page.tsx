@@ -236,7 +236,7 @@ export default function ProjectsPage() {
               </div>
 
               <p className="text-[#8B95A5] text-xs font-medium leading-relaxed line-clamp-2">
-                {project.description}
+                {project.desc}
               </p>
             </div>
           ))}

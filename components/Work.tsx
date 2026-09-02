@@ -23,6 +23,7 @@ export default function Work() {
   const [activeFilter, setActiveFilter] = useState("All Projects");
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const filters = [
     "All Projects",
@@ -109,8 +110,13 @@ export default function Work() {
       ? projects
       : projects.filter((p) => p.project_type === activeFilter);
 
-  // Show up to 6 latest projects on the Home Page
-  const displayProjects = filteredProjects.slice(0, 6);
+  // Pagination Logic (Strictly 3 per page)
+  const ITEMS_PER_PAGE = 3;
+  const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+  const displayProjects = filteredProjects.slice(
+    currentPage * ITEMS_PER_PAGE,
+    (currentPage + 1) * ITEMS_PER_PAGE,
+  );
 
   return (
     <section
@@ -149,7 +155,10 @@ export default function Work() {
           {filters.map((filter) => (
             <button
               key={filter}
-              onClick={() => setActiveFilter(filter)}
+              onClick={() => {
+                setActiveFilter(filter);
+                setCurrentPage(0);
+              }}
               className={`whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 border ${
                 activeFilter === filter
                   ? "bg-[#00E5B5] text-[#0B0F19] border-[#00E5B5]"
@@ -167,7 +176,15 @@ export default function Work() {
         {/* CARDS GRID & CAROUSEL UI */}
         <div className="relative group">
           {/* Floating Arrows */}
-          <button className="hidden lg:flex absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-[#131C2D] border border-[#1E293B] text-[#00E5B5] shadow-lg z-20 hover:scale-110 transition-transform hover:text-white">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
+            disabled={currentPage === 0 || displayProjects.length === 0}
+            className={`flex absolute -left-3 md:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full border border-[#1E293B] shadow-lg z-20 transition-all duration-300 ${
+              currentPage === 0 || displayProjects.length === 0
+                ? "bg-[#0B0F19] text-gray-600 cursor-not-allowed"
+                : "bg-[#131C2D] text-[#00E5B5] hover:scale-110 hover:text-white"
+            }`}
+          >
             <ChevronLeft size={24} />
           </button>
 
@@ -234,17 +251,40 @@ export default function Work() {
             )}
           </div>
 
-          <button className="hidden lg:flex absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-[#131C2D] border border-[#1E293B] text-[#00E5B5] shadow-lg z-20 hover:scale-110 transition-transform hover:text-white">
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))
+            }
+            disabled={
+              currentPage >= totalPages - 1 || displayProjects.length === 0
+            }
+            className={`flex absolute -right-3 md:-right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 items-center justify-center rounded-full border border-[#1E293B] shadow-lg z-20 transition-all duration-300 ${
+              currentPage >= totalPages - 1 || displayProjects.length === 0
+                ? "bg-[#0B0F19] text-gray-600 cursor-not-allowed"
+                : "bg-[#131C2D] text-[#00E5B5] hover:scale-110 hover:text-white"
+            }`}
+          >
             <ChevronRight size={24} />
           </button>
         </div>
 
         {/* Carousel Dots */}
-        <div className="flex justify-center items-center gap-2 mt-10">
-          <div className="w-8 h-2 rounded-full bg-[#00E5B5]"></div>
-          <div className="w-2 h-2 rounded-full bg-[#1E293B]"></div>
-          <div className="w-2 h-2 rounded-full bg-[#1E293B]"></div>
-        </div>
+        {totalPages > 0 && (
+          <div className="flex justify-center items-center gap-2 mt-10">
+            {Array.from({ length: totalPages }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentPage(idx)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  currentPage === idx
+                    ? "w-8 bg-[#00E5B5]"
+                    : "w-2 bg-[#1E293B] hover:bg-gray-600"
+                }`}
+                aria-label={`Go to page ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* BOTTOM CTA BAR */}
         <div className="mt-16 bg-[#ECFDF5] rounded-[2rem] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">

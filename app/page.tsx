@@ -116,12 +116,12 @@ export default function Home() {
               >
                 Let's Work Together <ArrowUpRight size={18} />
               </button>
-              <button
-                onClick={() => scrollToSection("work")}
-                className="flex items-center justify-center gap-2 px-8 py-4 border border-[#1E293B] hover:border-[#00E5B5] bg-[#131C2D] text-white text-sm font-bold rounded-full transition-all hover:bg-[#1a253c]"
+              <a
+                href="/projects"
+                className="flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#00E5B5] bg-[#00E5B5]/10 hover:bg-[#00E5B5]/20 text-[#00E5B5] text-sm font-extrabold rounded-full transition-all shadow-[0_0_20px_rgba(0,229,181,0.3)] hover:shadow-[0_0_30px_rgba(0,229,181,0.5)] scale-105"
               >
                 View My Work <ArrowUpRight size={18} />
-              </button>
+              </a>
             </div>
           </div>
 

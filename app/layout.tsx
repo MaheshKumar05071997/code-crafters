@@ -106,6 +106,62 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} bg-[#0B0F19]`}>
         <Navbar />
+
+        {/* RUNNING BANNER (Fixed right below the Navbar) */}
+        <div className="fixed top-20 left-0 w-full bg-[#070B14]/90 backdrop-blur-md py-3 z-40 overflow-hidden border-b border-t border-[#1E293B] shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+          <div className="animate-marquee hover:[animation-play-state:paused] flex items-center gap-8 md:gap-16 pl-4">
+            {/* --- FIRST SET --- */}
+            <div className="flex items-center gap-8 md:gap-16 whitespace-nowrap">
+              <span className="flex items-center gap-2 text-[#8B95A5] text-xs md:text-sm font-medium tracking-wide">
+                <span className="flex h-2 w-2 rounded-full bg-[#00E5B5] shadow-[0_0_8px_#00E5B5] animate-pulse"></span>
+                Call Now:{" "}
+                <span className="text-white font-bold">9880567308</span>
+              </span>
+              <span className="flex items-center gap-2 text-[#8B95A5] text-xs md:text-sm font-medium tracking-wide">
+                <span className="text-lg">🚀</span>
+                Get a Website starting from{" "}
+                <span className="text-[#00E5B5] font-extrabold px-2 py-0.5 rounded-md bg-[#00E5B5]/10 border border-[#00E5B5]/20">
+                  10k
+                </span>{" "}
+                + Free 1 Yr Domain
+              </span>
+              <span className="flex items-center gap-2 text-[#8B95A5] text-xs md:text-sm font-medium tracking-wide">
+                <span className="text-lg">⚡</span>
+                Web Apps starting from{" "}
+                <span className="text-[#00E5B5] font-extrabold px-2 py-0.5 rounded-md bg-[#00E5B5]/10 border border-[#00E5B5]/20">
+                  25k
+                </span>{" "}
+                + Complimentary Website
+              </span>
+            </div>
+
+            {/* --- SECOND SET (Exact duplicate for a seamless infinite loop) --- */}
+            <div className="flex items-center gap-8 md:gap-16 whitespace-nowrap">
+              <span className="flex items-center gap-2 text-[#8B95A5] text-xs md:text-sm font-medium tracking-wide">
+                <span className="flex h-2 w-2 rounded-full bg-[#00E5B5] shadow-[0_0_8px_#00E5B5] animate-pulse"></span>
+                Call Now:{" "}
+                <span className="text-white font-bold">9880567308</span>
+              </span>
+              <span className="flex items-center gap-2 text-[#8B95A5] text-xs md:text-sm font-medium tracking-wide">
+                <span className="text-lg">🚀</span>
+                Get a Website starting from{" "}
+                <span className="text-[#00E5B5] font-extrabold px-2 py-0.5 rounded-md bg-[#00E5B5]/10 border border-[#00E5B5]/20">
+                  10k
+                </span>{" "}
+                + Free 1 Yr Domain
+              </span>
+              <span className="flex items-center gap-2 text-[#8B95A5] text-xs md:text-sm font-medium tracking-wide">
+                <span className="text-lg">⚡</span>
+                Web Apps starting from{" "}
+                <span className="text-[#00E5B5] font-extrabold px-2 py-0.5 rounded-md bg-[#00E5B5]/10 border border-[#00E5B5]/20">
+                  25k
+                </span>{" "}
+                + Complimentary Website
+              </span>
+            </div>
+          </div>
+        </div>
+
         {children}
         <Footer />
       </body>

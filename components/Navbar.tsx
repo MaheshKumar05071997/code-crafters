@@ -3,11 +3,14 @@ import Link from "next/link";
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Home } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useGSAP(() => {
     gsap.fromTo(
@@ -22,14 +25,20 @@ export default function Navbar() {
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     href: string,
   ) => {
-    e.preventDefault(); // <--- This stops the URL from changing to /#work
-    const targetId = href.replace("#", "");
-    const elem = document.getElementById(targetId);
-
-    if (elem) {
-      elem.scrollIntoView({ behavior: "smooth" });
-    }
+    e.preventDefault();
     setIsOpen(false); // Close mobile menu if open
+
+    if (pathname === "/") {
+      // If we are already on the home page, scroll smoothly
+      const targetId = href.replace("#", "");
+      const elem = document.getElementById(targetId);
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // If we are on the projects page, redirect to the home page section
+      router.push(`/${href}`);
+    }
   };
 
   return (
@@ -43,8 +52,11 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              // Only prevent default and scroll if already on the Home page
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
             }}
             className="text-xl md:text-2xl font-black text-white tracking-tight hover:opacity-80 transition-opacity"
           >
@@ -105,8 +117,14 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* MOBILE MENU BUTTON (Hamburger) */}
-          <div className="md:hidden">
+          {/* MOBILE MENU BUTTONS */}
+          <div className="md:hidden flex items-center gap-5">
+            <Link
+              href="/"
+              className="text-gray-300 hover:text-[#00E5B5] transition-colors"
+            >
+              <Home size={22} />
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-300 hover:text-white focus:outline-none"

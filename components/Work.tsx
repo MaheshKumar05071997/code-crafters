@@ -9,8 +9,9 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -20,6 +21,8 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Work() {
   const workRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("All Projects");
+  const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const filters = [
     "All Projects",
@@ -28,65 +31,86 @@ export default function Work() {
     "Dashboards",
     "E-commerce",
     "SaaS",
+    "Business Automation",
   ];
+
+  // Fetch Live Projects
+  useEffect(() => {
+    async function fetchFeaturedProjects() {
+      try {
+        const { data, error } = await supabase
+          .from("projects")
+          .select("*")
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+        setProjects(data || []);
+      } catch (err) {
+        console.error("Error fetching projects:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchFeaturedProjects();
+  }, []);
 
   useGSAP(
     () => {
-      gsap.fromTo(
-        ".gsap-work-card",
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: workRef.current,
-            start: "top 80%",
+      if (!loading) {
+        gsap.fromTo(
+          ".gsap-work-card",
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: workRef.current,
+              start: "top 80%",
+            },
           },
-        },
-      );
+        );
+      }
     },
-    { scope: workRef },
+    { scope: workRef, dependencies: [loading, activeFilter] },
   );
 
-  const projects = [
-    {
-      id: 1,
-      title: "Smart Bill Reminder",
-      desc: "Android app that helps users track bills, set reminders, and avoid late payment charges.",
-      category: "Android App",
-      image: "/launcher_icon.png",
-      icon: <Smartphone size={20} className="text-[#059669]" />,
-      bg: "bg-[#ECFDF5]", // Light Green
-      tagColor: "text-[#059669] bg-[#D1FAE5]",
-      btnColor: "text-[#059669] hover:bg-[#D1FAE5]",
-    },
-    {
-      id: 2,
-      title: "Staff Attendance Portal",
-      desc: "Web platform to track employee attendance, leave, and working hours with real-time reports.",
-      category: "Web Application",
-      image: "/attendance_project.jpg",
-      icon: <Monitor size={20} className="text-[#6D28D9]" />,
-      bg: "bg-[#F5F3FF]", // Light Purple
-      tagColor: "text-[#6D28D9] bg-[#EDE9FE]",
-      btnColor: "text-[#6D28D9] hover:bg-[#EDE9FE]",
-    },
-    {
-      id: 3,
-      title: "Business Portfolio Sites",
-      desc: "High-performance websites built for businesses to establish credibility and engage customers.",
-      category: "Web Design & Dev",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-      icon: <Code size={20} className="text-[#0284C7]" />,
-      bg: "bg-[#F0F9FF]", // Light Blue
-      tagColor: "text-[#0284C7] bg-[#E0F2FE]",
-      btnColor: "text-[#0284C7] hover:bg-[#E0F2FE]",
-    },
-  ];
+  // Keep colors exactly the same dynamically based on project type
+  const getProjectStyle = (type: string) => {
+    if (type === "Mobile Apps") {
+      return {
+        icon: <Smartphone size={20} className="text-[#059669]" />,
+        bg: "bg-[#ECFDF5]",
+        tagColor: "text-[#059669] bg-[#D1FAE5]",
+        btnColor: "text-[#059669] hover:bg-[#D1FAE5]",
+      };
+    } else if (
+      ["Web Applications", "Dashboards", "SaaS", "E-commerce"].includes(type)
+    ) {
+      return {
+        icon: <Monitor size={20} className="text-[#6D28D9]" />,
+        bg: "bg-[#F5F3FF]",
+        tagColor: "text-[#6D28D9] bg-[#EDE9FE]",
+        btnColor: "text-[#6D28D9] hover:bg-[#EDE9FE]",
+      };
+    } else {
+      return {
+        icon: <Code size={20} className="text-[#0284C7]" />,
+        bg: "bg-[#F0F9FF]",
+        tagColor: "text-[#0284C7] bg-[#E0F2FE]",
+        btnColor: "text-[#0284C7] hover:bg-[#E0F2FE]",
+      };
+    }
+  };
+
+  const filteredProjects =
+    activeFilter === "All Projects"
+      ? projects
+      : projects.filter((p) => p.project_type === activeFilter);
+
+  // Show up to 6 latest projects on the Home Page
+  const displayProjects = filteredProjects.slice(0, 6);
 
   return (
     <section
@@ -148,51 +172,66 @@ export default function Work() {
           </button>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className={`gsap-work-card ${project.bg} rounded-[2rem] p-8 flex flex-col relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl min-h-[480px]`}
-              >
-                {/* Icon */}
-                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 z-10">
-                  {project.icon}
-                </div>
-
-                {/* Text Content */}
-                <div className="relative z-10 w-[85%]">
-                  <h3 className="font-extrabold text-2xl text-[#0B0F19] mb-3 leading-tight">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm font-medium leading-relaxed mb-8">
-                    {project.desc}
-                  </p>
-                </div>
-
-                {/* Tags & Explore Button at Bottom */}
-                <div className="mt-auto flex items-center justify-between relative z-10">
-                  <span
-                    className={`text-[11px] font-bold px-4 py-2 rounded-lg flex items-center gap-2 ${project.tagColor}`}
-                  >
-                    <Monitor size={14} /> {project.category}
-                  </span>
-                  <Link
-                    href="/projects"
-                    className={`text-[13px] font-bold px-4 py-2 rounded-lg flex items-center gap-1 transition-colors ${project.btnColor}`}
-                  >
-                    Explore <ArrowUpRight size={14} />
-                  </Link>
-                </div>
-
-                {/* Mockup Image Positioned bottom right */}
-                <div className="absolute -bottom-10 -right-10 w-[85%] h-[55%] rounded-tl-2xl overflow-hidden shadow-2xl rotate-[-5deg] group-hover:rotate-0 transition-all duration-500">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+            {loading ? (
+              <div className="col-span-1 md:col-span-3 py-20 text-center text-[#8B95A5] font-medium text-sm">
+                Loading featured projects...
               </div>
-            ))}
+            ) : displayProjects.length === 0 ? (
+              <div className="col-span-1 md:col-span-3 py-20 text-center text-[#8B95A5] font-medium text-sm bg-[#131C2D] rounded-3xl border border-[#1E293B]">
+                No projects found for this category.
+              </div>
+            ) : (
+              displayProjects.map((project) => {
+                const style = getProjectStyle(project.project_type);
+                return (
+                  <div
+                    key={project.id}
+                    className={`gsap-work-card ${style.bg} rounded-[2rem] p-8 flex flex-col relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl min-h-[480px]`}
+                  >
+                    {/* Icon */}
+                    <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 z-10">
+                      {style.icon}
+                    </div>
+                    {/* Text Content */}
+                    <div className="relative z-10 w-[85%]">
+                      <h3 className="font-extrabold text-2xl text-[#0B0F19] mb-3 leading-tight line-clamp-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm font-medium leading-relaxed mb-8 line-clamp-3">
+                        {project.description}
+                      </p>
+                    </div>
+                    {/* Tags & Explore Button at Bottom */}
+                    <div className="mt-auto flex items-center justify-between relative z-10">
+                      <span
+                        className={`text-[11px] font-bold px-4 py-2 rounded-lg flex items-center gap-2 ${style.tagColor}`}
+                      >
+                        <Monitor size={14} /> {project.project_type}
+                      </span>
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`text-[13px] font-bold px-4 py-2 rounded-lg flex items-center gap-1 transition-colors ${style.btnColor}`}
+                      >
+                        Explore <ArrowUpRight size={14} />
+                      </a>
+                    </div>
+                    {/* Mockup Image Positioned bottom right */}
+                    <div className="absolute -bottom-10 -right-10 w-[85%] h-[55%] rounded-tl-2xl overflow-hidden shadow-2xl rotate-[-5deg] group-hover:rotate-0 transition-all duration-500 bg-[#1E293B]">
+                      <img
+                        src={
+                          project.image_url ||
+                          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800"
+                        }
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
 
           <button className="hidden lg:flex absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 items-center justify-center rounded-full bg-[#131C2D] border border-[#1E293B] text-[#00E5B5] shadow-lg z-20 hover:scale-110 transition-transform hover:text-white">

@@ -224,10 +224,10 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-6 text-sm">Let's Connect</h4>
             <ul className="space-y-4 text-sm font-medium text-[#8B95A5]">
               <li className="hover:text-[#00E5B5] transition-colors cursor-pointer">
-                hello@codecrafters.dev
+                aditya.adiverma.verma@gmail.com
               </li>
               <li className="hover:text-[#00E5B5] transition-colors cursor-pointer">
-                +91 98765 43210
+                +91 98805 67308
               </li>
               <li>India</li>
             </ul>

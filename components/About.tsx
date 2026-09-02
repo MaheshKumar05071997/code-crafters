@@ -70,7 +70,7 @@ export default function About() {
             <div className="relative z-10 w-full rounded-[2.5rem] overflow-hidden bg-transparent">
               <img
                 src="/profile_image.jpg"
-                alt="Mahesh Kumar"
+                alt="Mahesh Kumar Vishwakarma - Full Stack Developer in Bangalore"
                 className="w-full h-auto object-cover rounded-[2.5rem] shadow-xl"
               />
             </div>
@@ -114,8 +114,9 @@ export default function About() {
           <div className="w-12 h-1 bg-[#00E5B5] mb-8 rounded-full"></div>
 
           <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-6 font-medium">
-            I'm a Full Stack Developer who understands that you need more than
-            just software—you need a solution that saves you time and money.
+            I'm <strong>Mahesh Kumar Vishwakarma</strong>, a Full Stack
+            Developer who understands that you need more than just software you
+            need a solution that saves you time and money.
           </p>
           <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-12">
             Starting with 8+ successful apps for local businesses, I have

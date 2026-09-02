@@ -41,29 +41,43 @@ export default function Home() {
   };
 
   // --- SEO: STRUCTURED DATA ---
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization", // Changed to Organization for an Agency
-    name: "Code Crafters",
-    url: "https://code-crafters-peach.vercel.app",
-    logo: "https://code-crafters-peach.vercel.app/profile_image.jpg",
-    telephone: "+91-9880567308",
-    description:
-      "Digital Product Development specializing in Business Automation and App Development.",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Bangalore",
-      addressRegion: "Karnataka",
-      addressCountry: "IN",
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Code Crafters",
+      url: "https://code-crafters-peach.vercel.app",
+      logo: "https://code-crafters-peach.vercel.app/profile_image.jpg",
+      telephone: "+91-9880567308",
+      description:
+        "Digital Product Development by Mahesh Kumar Vishwakarma specializing in Business Automation.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bangalore",
+        addressRegion: "Karnataka",
+        addressCountry: "IN",
+      },
     },
-    priceRange: "30000",
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "18:00",
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Mahesh Kumar Vishwakarma",
+      alternateName: ["Mahesh Kumar", "Mahesh Vishwakarma"],
+      url: "https://code-crafters-peach.vercel.app",
+      image: "https://code-crafters-peach.vercel.app/profile_image.jpg",
+      jobTitle: "Full Stack Web and Android Developer",
+      worksFor: {
+        "@type": "Organization",
+        name: "Code Crafters",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bangalore",
+        addressRegion: "Karnataka",
+        addressCountry: "IN",
+      },
     },
-  };
+  ];
 
   return (
     <main className="min-h-screen bg-slate-950 text-white selection:bg-teal-500/30">

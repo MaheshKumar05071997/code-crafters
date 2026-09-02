@@ -235,8 +235,9 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-[#1E293B] pt-8 flex items-center justify-center text-[#8B95A5] text-xs font-medium">
-          © 2025 CodeCrafters. All rights reserved.
+        <div className="border-t border-[#1E293B] pt-8 flex items-center justify-center text-[#8B95A5] text-xs font-medium text-center px-4">
+          2025 CodeCrafters. Designed & Developed by Mahesh Kumar Vishwakarma.
+          All rights reserved.
         </div>
       </div>
     </footer>

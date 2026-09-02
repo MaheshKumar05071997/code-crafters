@@ -13,13 +13,13 @@ export const metadata: Metadata = {
 
   // 2. Title Template (Appears in Browser Tab & Google Search)
   title: {
-    default: "Code Crafters | Digital Product Development",
-    template: "%s | Code Crafters",
+    default:
+      "Mahesh Kumar Vishwakarma | Code Crafters | Web & Android Developer",
+    template: "%s | Mahesh Kumar Vishwakarma",
   },
-
   // 3. Description (The grey text under the blue link in Google)
   description:
-    "Expert Android & Web Developer in Bangalore. I build custom business apps, bill reminders, attendance portals, and professional websites for small businesses.",
+    "Mahesh Kumar Vishwakarma is an expert Android & Web Developer in Bangalore. I build custom business apps, bill reminders, and professional websites for small businesses.",
 
   // 4. Keywords (What people search for)
   keywords: [
@@ -30,6 +30,17 @@ export const metadata: Metadata = {
     "Bill Reminder App Developer",
     "Staff Attendance System",
     "Small Business Automation",
+    "Mahesh Kumar Vishwakarma",
+    "Mahesh Kumar Vishwakarma Developer",
+    "Mahesh Kumar Vishwakarma Bangalore",
+    "Mahesh Vishwakarma",
+    "Mahesh Kumar",
+    "Android Developer Bangalore",
+    "Web Developer Freelance Bangalore",
+    "Custom Business Apps Developer",
+    "Next.js Developer India",
+    "Code Crafters Mahesh",
+    "Code Crafters Agency",
 
     // Your Name & Brand (So people find YOU)
     "Mahesh Kumar",
